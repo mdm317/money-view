@@ -69,6 +69,7 @@ export const expenseData2chartData = (
   const chartData1Arr = Object.keys(chartData1).map((key) => ({
     value: chartData1[key],
     name: key,
+    groupId: key,
   }));
   return [chartData1Arr, groupData];
 };

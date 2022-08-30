@@ -6,7 +6,7 @@ export type ExpensesItem = {
   storename: string;
   tag: string;
   date: string;
-  secondTag: string;
+  secondTag?: string;
 };
 
 export type ChartData = {

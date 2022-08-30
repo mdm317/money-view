@@ -4,39 +4,34 @@ import useExpenses from "../hooks/react-query/useExpenses";
 import { expenseData2chartData, numberToKoreaMoneyFormat } from "../utils";
 import { makeOption, moneyPieChartTitle } from "../utils/chart";
 import { ChartData } from "../types";
-import useExpenseDataFilter from "../hooks/useExpenseDataFilter";
-import ExpenseTable from "../Component/ExpenseTable";
-import useTags from "../hooks/react-query/useTags";
 
 function PieChartMoney() {
   const divRef = useRef(null);
 
-  const { data: tagList } = useTags();
-
-  const [selectedTag, setSelectedTag] = useState("");
   const { data: totalExpensesItems } = useExpenses();
   const [selectedDate, setSelectedDate] = useState<null | string>(null);
-  const filteredExpenseData = useExpenseDataFilter({
-    totalExpensesItems,
-    selectedDate,
-    tag: selectedTag,
-  });
   useEffect(() => {
     if (divRef.current && totalExpensesItems && selectedDate) {
-      var myChart = echarts.init(divRef.current);
+      const existChart = echarts.getInstanceByDom(divRef.current);
+      if (existChart) {
+        existChart.dispose();
+      }
+      const myChart = echarts.init(divRef.current);
       const [chartData, groupChartData] = expenseData2chartData(
         totalExpensesItems[selectedDate]
       );
       myChart.setOption(makeOption(chartData));
       myChart.on("click", function (params) {
         const data = params.data as ChartData;
-        myChart.setOption(
-          makeOption(groupChartData[data.name], {
-            back: () => {
-              myChart.setOption(makeOption(chartData));
-            },
-          })
-        );
+        if (data && data.groupId) {
+          myChart.setOption(
+            makeOption(groupChartData[data.name], {
+              back: () => {
+                myChart.setOption(makeOption(chartData));
+              },
+            })
+          );
+        }
       });
       myChart.on("legendselectchanged", (event: any) => {
         const totalSelectedMoney = chartData.reduce((ac, cu) => {

@@ -41,7 +41,7 @@ function App() {
           <Header
             routingInfo={[
               {
-                to: "pie",
+                to: "/",
                 title: "Pie Chart",
               },
               {
@@ -56,8 +56,8 @@ function App() {
           />
           <Routes>
             <Route path="/" element={<ProtectedLayout />}>
-              <Route index element={<CallenderMoney />}></Route>
-              <Route path="/pie" element={<PieChartMoney />}></Route>
+              <Route index element={<PieChartMoney />}></Route>
+              <Route path="/pie" element={<CallenderMoney />}></Route>
               <Route path="/edit" element={<EditMoney />}></Route>
               <Route path="/upload" element={<UploadMoney />}></Route>
             </Route>

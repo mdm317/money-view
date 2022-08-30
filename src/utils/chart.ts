@@ -75,6 +75,5 @@ export const makeOption = (data: ChartData[], opt?: Tem) => {
           },
         ],
   };
-  console.log("dd", option.graphic);
   return option;
 };

@@ -39,7 +39,11 @@ function UploadMoney() {
     mutateAsync({
       selectedDate: keydate,
       expensesItem: items,
-    });
+    })
+      .then(() => {
+        alert("성공");
+      })
+      .catch(() => alert("에러"));
   };
   return (
     <div>
