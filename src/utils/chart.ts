@@ -6,7 +6,10 @@ export const moneyPieChartTitle = {
   text: "쓴 돈",
   left: "center",
 };
-export const makeOption = (data: ChartData[]) => {
+type Tem = {
+  back: () => void;
+};
+export const makeOption = (data: ChartData[], opt?: Tem) => {
   const option: echarts.EChartsCoreOption = {
     title: [
       moneyPieChartTitle,
@@ -15,7 +18,7 @@ export const makeOption = (data: ChartData[]) => {
           data.reduce((ac, cu) => ac + cu.value, 0)
         ),
         left: "center",
-        top: "10%",
+        top: "5%",
       },
     ],
     tooltip: {
@@ -40,6 +43,38 @@ export const makeOption = (data: ChartData[]) => {
         },
       },
     ],
+    universalTransition: {
+      enabled: true,
+      divideShape: "clone",
+    },
+
+    graphic: opt?.back
+      ? [
+          {
+            type: "text",
+            left: "center",
+            top: 60,
+            style: {
+              text: "Back",
+              fontSize: 18,
+            },
+            onclick: function () {
+              opt.back();
+            },
+          },
+        ]
+      : [
+          {
+            type: "text",
+            left: "center",
+            top: 60,
+            style: {
+              text: "Back",
+              fontSize: 0,
+            },
+          },
+        ],
   };
+  console.log("dd", option.graphic);
   return option;
 };

@@ -24,12 +24,19 @@ function PieChartMoney() {
   useEffect(() => {
     if (divRef.current && totalExpensesItems && selectedDate) {
       var myChart = echarts.init(divRef.current);
-      const chartData = expenseData2chartData(totalExpensesItems[selectedDate]);
+      const [chartData, groupChartData] = expenseData2chartData(
+        totalExpensesItems[selectedDate]
+      );
       myChart.setOption(makeOption(chartData));
       myChart.on("click", function (params) {
         const data = params.data as ChartData;
-        const name = data.name;
-        setSelectedTag(name);
+        myChart.setOption(
+          makeOption(groupChartData[data.name], {
+            back: () => {
+              myChart.setOption(makeOption(chartData));
+            },
+          })
+        );
       });
       myChart.on("legendselectchanged", (event: any) => {
         const totalSelectedMoney = chartData.reduce((ac, cu) => {
@@ -71,13 +78,6 @@ function PieChartMoney() {
         </button>
       ))}
       <div className="min-h-[600px] w-full" ref={divRef}></div>
-      {filteredExpenseData.length !== 0 && selectedDate && tagList && (
-        <ExpenseTable
-          currentExpensesItems={filteredExpenseData}
-          selectedDate={selectedDate}
-          tagList={tagList}
-        />
-      )}
     </>
   );
 }

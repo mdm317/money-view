@@ -6,9 +6,11 @@ export type ExpensesItem = {
   storename: string;
   tag: string;
   date: string;
+  secondTag: string;
 };
 
 export type ChartData = {
   value: number;
+  groupId?: string;
   name: string;
 };

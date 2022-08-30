@@ -24,6 +24,12 @@ export default function ExpenseTable({
       setexpensesItems([...expensesItems]);
     }
   };
+  const handleChangeSecondTag = (index: number, newTag: string) => {
+    if (selectedDate) {
+      expensesItems[index].secondTag = newTag;
+      setexpensesItems([...expensesItems]);
+    }
+  };
   const deleteExpenseElem = (deleteIndex: number) => {
     console.log(deleteIndex);
     const newExpensesItem = expensesItems.filter((_, i) => i !== deleteIndex);
@@ -40,7 +46,7 @@ export default function ExpenseTable({
       <table className="mb-11 border-collapse table-auto w-full text-sm">
         <thead>
           <tr>
-            {["date", "storename", "price", "tag", "changetag", "delete"].map(
+            {["date", "storename", "price", "tag", "second tag", "delete"].map(
               (key) => (
                 <th
                   key={key}
@@ -59,7 +65,6 @@ export default function ExpenseTable({
                 expensesItem.date,
                 expensesItem.storename,
                 expensesItem.price,
-                expensesItem.tag,
               ].map((key) => (
                 <td
                   key={key}
@@ -71,9 +76,19 @@ export default function ExpenseTable({
               <td>
                 <DropDown
                   title="selecttag"
+                  value={expensesItem.tag}
                   menus={tagList}
                   index={i}
                   onClick={handleClickDropdown}
+                />
+              </td>
+              <td>
+                <DropDown
+                  title="select second tag"
+                  value={expensesItem.secondTag}
+                  menus={tagList}
+                  index={i}
+                  onClick={handleChangeSecondTag}
                 />
               </td>
               <td className="pl-9">
