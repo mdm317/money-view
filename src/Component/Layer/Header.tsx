@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signOutWithGoogle } from "../firebase/auth";
-import { useUser } from "../UserContext";
+import { signOutWithGoogle } from "../../firebase/auth";
+import { useUser } from "../../UserContext";
 
 type HeaderProp = {
   routingInfo: {
@@ -32,7 +32,28 @@ function Header({ routingInfo }: HeaderProp) {
               />
             </a>
           </div>
-
+          <div className="-mr-2 -my-2 md:hidden">
+            {user ? (
+              <div className="flex">
+                <div>{user.displayName}</div>
+                <button
+                  className={`bg-sky-100 ml-3  dropdown-toggle px-3 py-2.5  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap `}
+                  onClick={() => {
+                    signOutWithGoogle();
+                  }}
+                >
+                  log out
+                </button>
+              </div>
+            ) : (
+              <a
+                href="#"
+                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                Sign in
+              </a>
+            )}
+          </div>
           <div className="-mr-2 -my-2 md:hidden">
             <button
               type="button"

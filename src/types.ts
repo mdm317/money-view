@@ -8,7 +8,9 @@ export type ExpensesItem = {
   date: string;
   secondTag?: string;
 };
-
+export type ExpenseItemWithIndex = ExpensesItem & {
+  index: number;
+};
 export type ChartData = {
   value: number;
   groupId?: string;

@@ -1,7 +1,7 @@
 import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
-import useWriteTag from "../hooks/react-query/mutations/useWriteTag";
-import useTags from "../hooks/react-query/useTags";
-import { useUser } from "../UserContext";
+import useWriteTag from "../../hooks/react-query/mutations/useWriteTag";
+import useTags from "../../hooks/react-query/useTags";
+import { useUser } from "../../UserContext";
 import Sortable from "sortablejs";
 import { toast } from "react-toastify";
 

@@ -9,10 +9,10 @@ import CallenderMoney from "./pages/CallenderMoney";
 import PieChartMoney from "./pages/PieChartMoney";
 import EditMoney from "./pages/EditExpenses";
 import UploadMoney from "./pages/UploadMoney";
-import ProtectedLayout from "./Component/ProtectedLayout";
+import ProtectedLayout from "./Component/Router/ProtectedLayout";
 import "./firebase/firebaseApp";
 import "./App.css";
-import Header from "./Component/Header";
+import Header from "./Component/Layer/Header";
 
 const queryClient = new QueryClient({
   defaultOptions: {

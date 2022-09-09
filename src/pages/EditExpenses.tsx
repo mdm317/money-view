@@ -1,6 +1,6 @@
 import { useState } from "react";
-import EditTag from "../Component/EditTag";
-import ExpenseTable from "../Component/ExpenseTable";
+import EditTag from "../Component/Edit/EditTag";
+import ExpenseTable from "../Component/Edit/ExpenseTable";
 import useExpenses from "../hooks/react-query/useExpenses";
 import useTags from "../hooks/react-query/useTags";
 
@@ -39,7 +39,6 @@ function EditExpenses() {
           {totalExpensesItems && tagList && (
             <ExpenseTable
               currentExpensesItems={totalExpensesItems[selectedDate]}
-              tagList={tagList}
               selectedDate={selectedDate}
             />
           )}
